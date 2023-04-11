@@ -46,6 +46,10 @@ function createRandomHome() {
 }
 
 $('#addHome').on('click', function() {
-  let $home = createRandomHome()
-  $tbody.append($home)
+  if(newHomesCopy.length <=0){
+    alert('no more homes')
+  } else {
+    let $home = createRandomHome()
+    $tbody.append($home)
+  }
 })
