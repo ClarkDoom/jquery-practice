@@ -29,18 +29,23 @@ const newHomes = [
   },
 ]
 
-function getRandomInt() {
-  return Math.floor(Math.random() * newHomes.length);
-}
-
-const randomHome = newHomes[getRandomInt()]
-
-const $newHome = $(`<tr><td>${randomHome.address}</td><td>${randomHome.sf}</td><td>${randomHome.bedrooms}</td><td>${randomHome.baths}</td><td>${randomHome.price}</td><td><button class="btn btn-xs btn-danger">Remove</button></td></tr>`)
-
-
 let $tbody = $('tbody:last-child') 
 
+let newHomesCopy = [...newHomes]
+
+function getRandomInt() {
+  return Math.floor(Math.random() * newHomesCopy.length);
+}
+
+function createRandomHome() {
+  let randomInt = getRandomInt()
+  let randomHome = newHomesCopy[randomInt]
+  let grabbedHome = $(`<tr><td>${randomHome.address}</td><td>${randomHome.sf}</td><td>${randomHome.bedrooms}</td><td>${randomHome.baths}</td><td>${randomHome.price}</td><td><button class="btn btn-xs btn-danger">Remove</button></td></tr>`)
+  newHomesCopy.splice(randomInt,1)
+  return grabbedHome
+}
 
 $('#addHome').on('click', function() {
-  $tbody.append($newHome)
+  let $home = createRandomHome()
+  $tbody.append($home)
 })
